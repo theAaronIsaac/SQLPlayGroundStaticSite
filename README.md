@@ -1,19 +1,63 @@
+SQL Playground (Static Version)
+Welcome to SQL Playground — a fully static, browser-based simulation of SQL Server Management Studio (SSMS)!
 
-# SQL Playground (Static Version)
+Hosted live here:
+👉 https://theaaronisaac.github.io/SQLPlayGroundStaticSite/
 
-This is a fully static SQL Playground designed to simulate a mini SQL Server Management Studio (SSMS) experience.
+✨ Features
+📂 Object Explorer (Sidebar)
 
-## Features
-- Object Explorer: Tables, Views, Indexes
-- Query Editor: Write and run `SELECT * FROM tablename;` queries
-- Console Log: Error messages and query info
-- No backend needed — fully browser-based
+Lists Tables, Views, and Indexes
 
-## Deployment
-1. Upload all files (`index.html`, `style.css`, `README.md`) to your GitHub repository.
-2. Go to Repository Settings → Pages → Select branch (e.g., `main`) and root (`/`).
-3. Save and publish.
-4. Access your live SQL Playground via GitHub Pages.
+Click a Table or View to auto-fill a SELECT * FROM tablename; query
 
----
-**Note:** This playground only supports basic `SELECT *` queries with mock data.
+🧠 Smart Query Editor
+
+Write and run basic SQL queries
+
+Only safe SELECT * queries are supported
+
+🖥️ Console Log Output
+
+Execution info
+
+Error messages
+
+Timestamps for all console messages
+
+🗂️ Fake Mock Database Support
+
+Mocked tables like users, products, orders
+
+Mocked views like active_users, recent_orders
+
+Mocked indexes
+
+🛡️ 100% Static - No Backend Needed
+
+Deployable anywhere: GitHub Pages, Netlify, Vercel, Local File System
+
+⚡ Instant GitHub Pages Ready
+
+No server setup
+
+No dependencies
+
+No frameworks required
+
+🚀 Deployment Guide
+Upload index.html, style.css, and README.md into your GitHub repository.
+
+Go to your repository → Settings → Pages → choose your branch (like main) and root /.
+
+Save. Done! 🚀
+
+⚡ Future Ideas (Stretch Goals)
+Save/load custom SQL scripts
+
+Query execution history tracking
+
+Client-side SQLite database integration
+
+Advanced autocomplete for SQL syntax
+
