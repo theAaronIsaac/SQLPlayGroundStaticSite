@@ -6,19 +6,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SQL Playground</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body { display: flex; flex-direction: row; height: 100vh; margin: 0; font-family: Arial, sans-serif; }
+        #sidebar { width: 250px; background: #f4f4f4; padding: 10px; border-right: 1px solid #ccc; overflow-y: auto; }
+        #main { flex: 1; display: flex; flex-direction: column; padding: 10px; }
+        #sql-input { width: 100%; height: 150px; }
+        #output, #console { background: #eee; padding: 10px; margin-top: 10px; height: 200px; overflow-y: auto; white-space: pre-wrap; }
+        h2 { font-size: 18px; margin-bottom: 5px; }
+        .object-item { cursor: pointer; padding: 2px; }
+        .object-item:hover { background: #ddd; }
+        button { margin-top: 10px; padding: 10px; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>SQL Playground</h1>
-    </header>
-
-    <main>
-        <textarea id="sql-input" placeholder="Write your SQL query here..." rows="10" cols="80"></textarea>
-        <br>
-        <button onclick="executeSQL()">Run SQL</button>
-        <pre id="output"></pre>
-    </main>
-
-    <script src="SQLPlayground.js"></script>
+    <div id="sidebar">
+        <h2>Object Explorer</h2>
+        <div><strong>Tables</strong><ul id="tables"></ul></div>
+        <div><strong>Views</strong><ul id="views"></ul></div>
+        <div><strong>Indexes</strong><ul id="indexes"></ul></div>
+    </div>
+    <div id="main">
+        <textarea id="sql-input" placeholder="Write your SQL query here..."></textarea>
+        <button onclick="executeSQL()">Run Query</button>
+        <pre id="output">Results appear here...</pre>
+        <pre id="console">Console output...</pre>
+    </div>
+    <script>
+        const mockTables = ['users', 'products', 'orders'];
+        const mockViews = ['active_users', 'recent_orders'];
+        const mockIndexes = ['idx_users_email', 'idx_products_price'];
+        function populateSidebar() {
+            const tablesList = document.getElementById('tables');
+            const viewsList = document.getElementById('views');
+            const indexesList = document.getElementById('indexes');
+            mockTables.forEach(table => {
+                const li = document.createElement('li');
+                li.className = 'object-item';
+                li.innerText = table;
+                li.onclick = () => { document.getElementById('sql-input').value = `SELECT * FROM ${table};`; logConsole(`Prepared SELECT * FROM ${table}`); };
+                tablesList.appendChild(li);
+            });
+            mockViews.forEach(view => {
+                const li = document.createElement('li');
+                li.className = 'object-item';
+                li.innerText = view;
+                li.onclick = () => { document.getElementById('sql-input').value = `SELECT * FROM ${view};`; logConsole(`Prepared SELECT * FROM ${view}`); };
+                viewsList.appendChild(li);
+            });
+            mockIndexes.forEach(index => {
+                const li = document.createElement('li');
+                li.className = 'object-item';
+                li.innerText = index;
+                li.onclick = () => { logConsole(`Indexes cannot be directly selected.`); };
+                indexesList.appendChild(li);
+            });
+        }
+        function executeSQL() {
+            const query = document.getElementById('sql-input').value.trim();
+            const output = document.getElementById('output');
+            if (!query) { logConsole('No SQL query entered.'); return; }
+            logConsole(`Executing query: ${query}`);
+            if (query.toLowerCase().startsWith('select * from')) {
+                const tableName = query.split(' ')[3].replace(';', '');
+                if (mockTables.includes(tableName) || mockViews.includes(tableName)) {
+                    output.innerText = `Showing all data from ${tableName} (mock data).
+[id]	[name]
+1	Example Name
+2	Another Example`;
+                    logConsole('Query executed successfully.');
+                } else {
+                    output.innerText = '';
+                    logConsole(`Error: Table or View '${tableName}' does not exist.`);
+                }
+            } else {
+                output.innerText = '';
+                logConsole('Error: Only SELECT * queries are supported.');
+            }
+        }
+        function logConsole(message) {
+            const consoleBox = document.getElementById('console');
+            consoleBox.innerText += `\n${new Date().toLocaleTimeString()}: ${message}`;
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+        }
+        window.onload = populateSidebar;
+    </script>
 </body>
 </html>
