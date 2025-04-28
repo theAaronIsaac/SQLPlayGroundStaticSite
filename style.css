@@ -1,0 +1,79 @@
+
+/* Additional custom styles for SQL Playground */
+
+/* SQL Syntax Highlighting */
+.sql-keyword {
+    color: #0000ff;
+    font-weight: bold;
+  }
+  
+  .sql-table {
+    color: #009688;
+  }
+  
+  .sql-function {
+    color: #9c27b0;
+  }
+  
+  .sql-operator {
+    color: #ff9800;
+  }
+  
+  .sql-string {
+    color: #008000;
+  }
+  
+  .sql-number {
+    color: #ff5722;
+  }
+  
+  /* Custom scrollbar for results table */
+  .overflow-x-auto::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .overflow-x-auto::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  
+  .overflow-x-auto::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+  
+  .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .flex.flex-wrap.gap-2 {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    .flex.flex-wrap.gap-2 button {
+      margin-bottom: 8px;
+    }
+    
+    .app-title {
+      font-size: 1.2rem;
+    }
+  }
+  
+  /* Focus styles for accessibility */
+  button:focus, textarea:focus, input:focus {
+    outline: 2px solid #4299e1;
+    outline-offset: 2px;
+  }
+  
+  /* Transition effects */
+  button, .border-b-2 {
+    transition: all 0.2s ease;
+  }
+  
+  /* SQL Editor textarea placeholder styling */
+  textarea::placeholder {
+    color: #a0aec0;
+  }
